@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/greeting', function () {
+Route::get('/x', function () {
     return 'Hello World';
 });
 
-//Route::get('/user', [UserController::class, 'index']);
+// Route::resource('photos', PhotoController::class)->only([
+//     'index', 'show'
+// ]);
+
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+]);
+
+Route::get('/blog', [BlogController::class, 'index']);
